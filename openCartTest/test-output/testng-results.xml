@@ -2,40 +2,40 @@
 <testng-results skipped="1" failed="0" total="7" passed="6">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="11009" started-at="2016-01-29T18:05:56Z" finished-at="2016-01-29T18:06:07Z">
+  <suite name="Default suite" duration-ms="10277" started-at="2016-01-29T18:16:50Z" finished-at="2016-01-29T18:17:00Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="11009" started-at="2016-01-29T18:05:56Z" finished-at="2016-01-29T18:06:07Z">
+    <test name="Default test" duration-ms="10277" started-at="2016-01-29T18:16:50Z" finished-at="2016-01-29T18:17:00Z">
       <class name="testes.MainPage">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="setUp" is-config="true" duration-ms="6705" started-at="2016-01-29T19:05:56Z" finished-at="2016-01-29T19:06:03Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="setUp" is-config="true" duration-ms="6680" started-at="2016-01-29T19:16:50Z" finished-at="2016-01-29T19:16:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="isHomePage()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="isHomePage" duration-ms="24" started-at="2016-01-29T19:06:03Z" finished-at="2016-01-29T19:06:03Z">
+        <test-method status="PASS" signature="isHomePage()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="isHomePage" duration-ms="58" started-at="2016-01-29T19:16:56Z" finished-at="2016-01-29T19:16:56Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- isHomePage -->
-        <test-method status="PASS" signature="searchProducts()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="searchProducts" duration-ms="1448" started-at="2016-01-29T19:06:03Z" finished-at="2016-01-29T19:06:05Z">
+        <test-method status="PASS" signature="searchProducts()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="searchProducts" duration-ms="919" started-at="2016-01-29T19:16:56Z" finished-at="2016-01-29T19:16:57Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- searchProducts -->
-        <test-method status="PASS" signature="changeCurrency()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="changeCurrency" duration-ms="1149" started-at="2016-01-29T19:06:05Z" depends-on-methods="testes.MainPage.isHomePage" finished-at="2016-01-29T19:06:06Z">
+        <test-method status="PASS" signature="changeCurrency()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="changeCurrency" duration-ms="1116" started-at="2016-01-29T19:16:57Z" depends-on-methods="testes.MainPage.isHomePage" finished-at="2016-01-29T19:16:58Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- changeCurrency -->
-        <test-method status="PASS" signature="addToCompare()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="addToCompare" duration-ms="285" started-at="2016-01-29T19:06:06Z" depends-on-methods="testes.MainPage.searchProducts" finished-at="2016-01-29T19:06:06Z">
+        <test-method status="PASS" signature="addToCompare()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="addToCompare" duration-ms="295" started-at="2016-01-29T19:16:58Z" depends-on-methods="testes.MainPage.searchProducts" finished-at="2016-01-29T19:16:59Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- addToCompare -->
-        <test-method status="PASS" signature="goToComparePage()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="goToComparePage" duration-ms="1199" started-at="2016-01-29T19:06:06Z" depends-on-methods="testes.MainPage.addToCompare" finished-at="2016-01-29T19:06:07Z">
+        <test-method status="PASS" signature="goToComparePage()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="goToComparePage" duration-ms="1044" started-at="2016-01-29T19:16:59Z" depends-on-methods="testes.MainPage.addToCompare" finished-at="2016-01-29T19:17:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- goToComparePage -->
-        <test-method status="PASS" signature="usun()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="usun" duration-ms="181" started-at="2016-01-29T19:06:07Z" depends-on-methods="testes.MainPage.goToComparePage" finished-at="2016-01-29T19:06:07Z">
+        <test-method status="PASS" signature="usun()[pri:0, instance:testes.MainPage@3f0ee7cb]" name="usun" duration-ms="150" started-at="2016-01-29T19:17:00Z" depends-on-methods="testes.MainPage.goToComparePage" finished-at="2016-01-29T19:17:00Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- usun -->
-        <test-method status="SKIP" signature="ileiel(int)[pri:0, instance:testes.MainPage@3f0ee7cb]" name="ileiel" duration-ms="0" started-at="2016-01-29T19:06:07Z" depends-on-methods="testes.MainPage.usun" finished-at="2016-01-29T19:06:07Z">
+        <test-method status="SKIP" signature="ileiel(int)[pri:0, instance:testes.MainPage@3f0ee7cb]" name="ileiel" duration-ms="0" started-at="2016-01-29T19:17:00Z" depends-on-methods="testes.MainPage.usun" finished-at="2016-01-29T19:17:00Z">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
