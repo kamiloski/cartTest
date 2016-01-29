@@ -19,7 +19,7 @@ HomePage hp;
 	public void setUp(){
 	driver = new FirefoxDriver();
 	driver.get("http://demo.opencart.com/");
-	//driver.manage().window().maximize();
+	driver.manage().window().maximize();
 	hp = PageFactory.initElements(driver, HomePage.class);
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	
@@ -51,15 +51,15 @@ HomePage hp;
 	
 		
 	}
-	@Test(dependsOnMethods = { "goToComparePage" })
+/*	@Test(dependsOnMethods = { "goToComparePage" })
 	public void usun(){
 		hp.findAvailability();
 		
 	}
-	
-	@Test(dependsOnMethods = { "usun" })
-	public void ileiel(int availabilityPosition){
-		hp.ile(availabilityPosition);
+*/	
+	@Test
+	public void chooseRandomItemToCart(){
+		hp.chooseRandomItem();
 	}
 	
 /*	@AfterTest
