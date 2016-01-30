@@ -8,58 +8,69 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import pages.BasePage;
+import pages.ComparePage;
 import pages.HomePage;
+import pages.SearchResultsPage;
+import pages.TopNavigation;
 
 public class MainPage {
-
-WebDriver driver;
-HomePage hp;
+	private static final String[] addToCompare = null;
+	HomePage hp;
+	TopNavigation topNav;
+	ComparePage cp;
+	SearchResultsPage srp;
+	WebDriver driver;
 	
 	@BeforeTest
 	public void setUp(){
-	driver = new FirefoxDriver();
+	WebDriver driver = new FirefoxDriver();
 	driver.get("http://demo.opencart.com/");
 	driver.manage().window().maximize();
-	hp = PageFactory.initElements(driver, HomePage.class);
+	
+	hp =  PageFactory.initElements(driver, HomePage.class);
+	topNav = PageFactory.initElements(driver, TopNavigation.class);
+	srp = PageFactory.initElements(driver, SearchResultsPage.class);
+	cp = PageFactory.initElements(driver, ComparePage.class);
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	
 	}
 	
-	@Test
-	public void isHomePage(){
+	@Test(priority = 0)
+	public void checkIsHomePage(){
 		hp.isHomePage();
 	}
 	
-	@Test(dependsOnMethods = { "isHomePage" })
+	@Test
 	public void changeCurrency(){
-		hp.clickButtonChangeCurrency();
-		hp.setCurrency();
+		topNav.clickButtonChangeCurrency();
+		topNav.setCurrency();
 	}
 	@Test
 	public void searchProducts(){
 		hp.inputIntoSearch();
 		hp.clickSearchButton();
 	}
-	@Test(dependsOnMethods = { "searchProducts" })
+
+	@Test(dependsOnMethods = "searchProducts")
 	public void addToCompare(){
-		hp.compareItems();
+		srp.compareItems();
 	}
 	
-	@Test(dependsOnMethods = { "addToCompare" })
+	@Test(dependsOnMethods = "addToCompare")
 	public void goToComparePage(){
-		hp.goToComparePage();
+		srp.goToComparePage();
+	}
 	
-		
-	}
-/*	@Test(dependsOnMethods = { "goToComparePage" })
+	@Test(dependsOnMethods = "goToComparePage")
 	public void usun(){
-		hp.findAvailability();
+		cp.findAvailability();
 		
 	}
-*/	
-	@Test
+	
+	@Test(dependsOnMethods = "usun")
 	public void chooseRandomItemToCart(){
-		hp.chooseRandomItem();
+		cp.chooseRandomItem();
 	}
 	
 /*	@AfterTest
