@@ -27,7 +27,6 @@ public class MainPage {
 	WebDriver driver = new FirefoxDriver();
 	driver.get("http://demo.opencart.com/");
 	driver.manage().window().maximize();
-	
 	hp =  PageFactory.initElements(driver, HomePage.class);
 	topNav = PageFactory.initElements(driver, TopNavigation.class);
 	srp = PageFactory.initElements(driver, SearchResultsPage.class);

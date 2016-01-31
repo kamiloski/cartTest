@@ -20,6 +20,7 @@ public class HomePage {
 
 	@FindBy(className = "input-lg")
 	WebElement inputSearch;	
+	
 	@FindBy(className = "btn-lg")
 	WebElement searchButton;		
 	
@@ -33,7 +34,7 @@ public class HomePage {
 		Assert.assertEquals(pageTitle, PAGE_TITLE);
 	}
 	
-	public void inputIntoSearch(){
+	public void inputIntoSearch( ){
 		String itemName = "ipod";
 		inputSearch.sendKeys(itemName);
 	}
