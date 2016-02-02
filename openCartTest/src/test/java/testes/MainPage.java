@@ -89,13 +89,15 @@ public class MainPage {
 
 	}
 
-	@Test(dependsOnMethods = "usun")
+	@Test(dependsOnMethods = "goToComparePage")
 	public void chooseRandomItemToCart() {
-		comparepage.putRandomItemToCartAndReturnPrice();
-		/*comparepage.getPriceFromCart();
+/*		String aaa = comparepage.putRandomItemToCartAndReturnPrice();
+		String sss = comparepage.getPriceFromCart();*/
+		
+		//System.out.println("put random to " + aaa + " cena z kosza to " + sss);
 		Assert.assertTrue(comparepage.putRandomItemToCartAndReturnPrice().
 				contains(comparepage.getPriceFromCart()));
-		*/
+		
 	}
 	
 	/*

@@ -15,6 +15,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS;
 
+import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
+
 public class ComparePage extends BasePage {
 
 	public String PAGE_TITLE = "Product Comparison";
@@ -24,7 +26,7 @@ public class ComparePage extends BasePage {
 
 	@FindBy(xpath = "//input[@value = \"Add to Cart\"]")
 	List<WebElement> addToCartButtons;
-	
+
 	@FindBy(id = "cart-total")
 	WebElement priceFromCart;
 
@@ -55,36 +57,29 @@ public class ComparePage extends BasePage {
 
 	}
 
-	public void chooseRandomItem() {
+	public String putRandomItemToCartAndReturnPrice() {
 
-		/*List<WebElement> links = driver.findElements(By.xpath("//input[@value = \"Add to Cart\"]"));
-		Random gen = new Random();
-		WebElement link = links.get(gen.nextInt(links.size()));
-		WebElement price = link.findElement(By.xpath("preceding::td[. = 'Price']/following-sibling::td"));
-		link.click();
-		String dupa = price.getText();
+		int availableTdOfProductInTable = addToCartButtons.size() + 1;
+		Random random = new Random();
+		int randomProductNumber = random.nextInt((availableTdOfProductInTable - 2) + 1) + 2;
 
-		System.out.println("link jest takie duzy " + links.size() + " a numer urządzenia to " + dupa);*/
+		WebElement CartButton = driver.findElement(By.xpath(
+				"//table[@class='table table-bordered']/tbody[2]/tr/td[" + randomProductNumber + "]/input/self::*"));
+		CartButton.click();
+
+		WebElement productPrice = driver.findElement(By.xpath(
+				"//table[@class='table table-bordered']/tbody[1]/tr[3]/td[" + randomProductNumber + "]/self::*"));
+		String getPriceAddedToCartProduct = productPrice.getText();
+
+		return getPriceAddedToCartProduct;
 	}
-	
-	public String putRandomItemToCartAndReturnPrice(){
-	int availableTdOfProductInTable = addToCartButtons.size() + 1;
-	Random random = new Random();
-	int randomProductNumber = random.nextInt((availableTdOfProductInTable - 2) + 1) + 2;
-	WebElement CartButton = driver.findElement(By.
-			xpath("//table[@class='table table-bordered']/tbody[2]/tr/td[" + randomProductNumber +"]/input/self::*"));
-	CartButton.click();
-	WebElement productPrice= driver.findElement(By.
-			xpath("//table[@class='table table-bordered']/tbody[1]/tr[3]/td[" + randomProductNumber +"]/self::*"));
-	String getPriceAddedToCartProduct = productPrice.getText();
 
-	System.out.println("wylosowana liczba to - " + randomProductNumber + " numer ceny " +productPrice.toString() + "numer buttona " + CartButton.toString() );
-	
-	return getPriceAddedToCartProduct;
-	}
-	
-	public String getPriceFromCart(){
-		return priceFromCart.getText();
+	public String getPriceFromCart() {
+		String textFromCart = priceFromCart.getText();
+		String[] priceFromCart = textFromCart.split(" ", 4);
+		System.out.println(priceFromCart[3] + "  dsadasdsdddddddddddddd");
+
+		return priceFromCart[3];
 	}
 
 }
