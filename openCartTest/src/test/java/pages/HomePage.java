@@ -13,8 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-public class HomePage {
-	WebDriver driver;	
+public class HomePage extends BasePage{
 	
 	public String PAGE_TITLE = "Your Store";
 
@@ -25,18 +24,16 @@ public class HomePage {
 	WebElement searchButton;		
 	
 	public HomePage(WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void isHomePage(){
-		String pageTitle = driver.getTitle();
-		Assert.assertEquals(pageTitle, PAGE_TITLE);
+	public String isHomePage(){
+		return driver.getTitle();	
 	}
 	
-	public void inputIntoSearch( ){
-		String itemName = "ipod";
-		inputSearch.sendKeys(itemName);
+	public void inputIntoSearch(String searchingItemName ){
+		inputSearch.sendKeys(searchingItemName);
 	}
 	
 	public  SearchResultsPage clickSearchButton(){
