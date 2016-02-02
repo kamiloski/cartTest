@@ -17,17 +17,12 @@ import pages.BasePage;
 
 public class TopNavigation extends BasePage {
 
-	private int newCurrencySymbol;
-	
 	@FindBy(id = "currency")
 	WebElement currencyDropDown;
 
-	@FindBy(css = "dropdown-menu")
-	List<WebElement> currences;
-	
 	@FindBy(xpath = ".//*[@id='currency']//button/strong")
 	WebElement currentCurrencySymbol;
-	
+
 	public TopNavigation(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -38,18 +33,16 @@ public class TopNavigation extends BasePage {
 	}
 
 	public char setCurrency(String currencyToSet) {
-		WebElement currencyVal = driver.findElement(By.name(currencyToSet.toUpperCase()));
-		String currencyName = currencyVal.getText();
-		System.out.println("Currency Name:" + currencyName);
-		currencyVal.click();
-		char[] currencyNameArray = currencyName.toCharArray();
-		char newCurrencySymbol = currencyNameArray[0];
-		System.out.println(newCurrencySymbol);
+		WebElement setCurrencyVal = driver.findElement(By.name(currencyToSet.toUpperCase()));
+		String currencyName = setCurrencyVal.getText();
+		setCurrencyVal.click();
+		char newCurrencySymbol = currencyName.charAt(0);
 		return newCurrencySymbol;
 	}
 
-	public char[] getCurrentCurrencySymbol(){
-		return currentCurrencySymbol.getText().toCharArray();//string??
+	public char getCurrentCurrencySymbol() {
+		char currentSymbol = currentCurrencySymbol.getText().charAt(0);
+		return currentSymbol;
 	}
-	
+
 }

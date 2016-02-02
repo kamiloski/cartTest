@@ -3,7 +3,9 @@ package testes;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.http.util.Asserts;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -18,10 +20,10 @@ import pages.HomePage;
 import pages.SearchResultsPage;
 
 public class MainPage {
-	HomePage hp;
-	TopNavigation topNav;
-	ComparePage cp;
-	SearchResultsPage srp;
+	HomePage homepage;
+	TopNavigation topnavigation;
+	ComparePage comparepage;
+	SearchResultsPage searchresultspage;
 	WebDriver driver;
 
 	@BeforeTest
@@ -29,65 +31,73 @@ public class MainPage {
 		WebDriver driver = new FirefoxDriver();
 		driver.get("http://demo.opencart.com/");
 		driver.manage().window().maximize();
-		hp = PageFactory.initElements(driver, HomePage.class);
-		topNav = PageFactory.initElements(driver, TopNavigation.class);
-		srp = PageFactory.initElements(driver, SearchResultsPage.class);
-		cp = PageFactory.initElements(driver, ComparePage.class);
+		homepage = PageFactory.initElements(driver, HomePage.class);
+		topnavigation = PageFactory.initElements(driver, TopNavigation.class);
+		searchresultspage = PageFactory.initElements(driver, SearchResultsPage.class);
+		comparepage = PageFactory.initElements(driver, ComparePage.class);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 	}
 
 	@Test(priority = 0)
 	public void checkIsHomePage() {
-		Assert.assertEquals(hp.PAGE_TITLE, hp.isHomePage());
+		Assert.assertEquals(homepage.PAGE_TITLE, homepage.isHomePage());
 	}
 
 	@Test
 	public void changeCurrency() {
 		String curr = "eur";
-		topNav.clickCurrencyDropDown();
-		char nowa = topNav.setCurrency(curr);
-
-		Assert.assertEquals(topNav.getCurrentCurrencySymbol(), nowa);
+		topnavigation.clickCurrencyDropDown();
+		char newCurrencyToSet = topnavigation.setCurrency(curr);
+		char currencyAfterSet = topnavigation.getCurrentCurrencySymbol();
+		Assert.assertEquals(currencyAfterSet,
+							newCurrencyToSet);
 	}
 
 	@Test
-	public void searchProducts() {
-		hp.inputIntoSearch("ipod");
-		hp.clickSearchButton();
+	public void searchomepageroducts() {
+		homepage.inputIntoSearch("ipod");
+		homepage.clickSearchButton();
 	}
 
-	@Test(dependsOnMethods = "searchProducts")
+	@Test(dependsOnMethods = "searchomepageroducts")
 	public void isSearchResultsPage() {
-		Assert.assertTrue(srp.isSearchResoultsPage().contains(srp.PAGE_TITLE));
+		Assert.assertTrue(searchresultspage.isSearchResoultsPage().
+				 contains(searchresultspage.PAGE_TITLE));
 	}
 
-	@Test(dependsOnMethods = "searchProducts")
+	@Test(dependsOnMethods = "searchomepageroducts")
 	public void addToCompare() {
-		srp.compareAllItems();
+		searchresultspage.compareAllItems();
+		searchresultspage.areAllItemsClickedCompare();
 	}
-
+		
 	@Test(dependsOnMethods = "addToCompare")
 	public void goToComparePage() {
-		srp.goToComparePage();
+		searchresultspage.goToComparePage();
 	}
 
 	@Test(dependsOnMethods = "goToComparePage")
 	public void isComparePage() {
-		Assert.assertEquals(cp.isComparePage(), cp.PAGE_TITLE);
+		Assert.assertEquals(comparepage.isComparePage(), 
+							comparepage.PAGE_TITLE);
 	}
 
 	@Test(dependsOnMethods = "goToComparePage")
 	public void usun() {
-		cp.findAvailability();
+		comparepage.findAvailability();
 
 	}
 
 	@Test(dependsOnMethods = "usun")
 	public void chooseRandomItemToCart() {
-		cp.chooseRandomItem();
+		comparepage.putRandomItemToCartAndReturnPrice();
+		/*comparepage.getPriceFromCart();
+		Assert.assertTrue(comparepage.putRandomItemToCartAndReturnPrice().
+				contains(comparepage.getPriceFromCart()));
+		*/
 	}
-
+	
 	/*
 	 * @AfterTest public void tearDown(){ driver.quit(); driver.close(); }
 	 */

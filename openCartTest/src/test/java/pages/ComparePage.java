@@ -23,12 +23,13 @@ public class ComparePage extends BasePage {
 	List<WebElement> availabilityFields;
 
 	@FindBy(xpath = "//input[@value = \"Add to Cart\"]")
-	// @FindBy(className = "btn.btn-primary.btn-block")
 	List<WebElement> addToCartButtons;
+	
+	@FindBy(id = "cart-total")
+	WebElement priceFromCart;
 
 	public ComparePage(WebDriver driver) {
 		super(driver);
-		// this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
@@ -56,14 +57,34 @@ public class ComparePage extends BasePage {
 
 	public void chooseRandomItem() {
 
-		List<WebElement> links = driver.findElements(By.xpath("//input[@value = \"Add to Cart\"]"));
+		/*List<WebElement> links = driver.findElements(By.xpath("//input[@value = \"Add to Cart\"]"));
 		Random gen = new Random();
 		WebElement link = links.get(gen.nextInt(links.size()));
 		WebElement price = link.findElement(By.xpath("preceding::td[. = 'Price']/following-sibling::td"));
 		link.click();
 		String dupa = price.getText();
 
-		System.out.println("link jest takie duzy " + links.size() + " a numer urządzenia to " + dupa);
+		System.out.println("link jest takie duzy " + links.size() + " a numer urządzenia to " + dupa);*/
+	}
+	
+	public String putRandomItemToCartAndReturnPrice(){
+	int availableTdOfProductInTable = addToCartButtons.size() + 1;
+	Random random = new Random();
+	int randomProductNumber = random.nextInt((availableTdOfProductInTable - 2) + 1) + 2;
+	WebElement CartButton = driver.findElement(By.
+			xpath("//table[@class='table table-bordered']/tbody[2]/tr/td[" + randomProductNumber +"]/input/self::*"));
+	CartButton.click();
+	WebElement productPrice= driver.findElement(By.
+			xpath("//table[@class='table table-bordered']/tbody[1]/tr[3]/td[" + randomProductNumber +"]/self::*"));
+	String getPriceAddedToCartProduct = productPrice.getText();
+
+	System.out.println("wylosowana liczba to - " + randomProductNumber + " numer ceny " +productPrice.toString() + "numer buttona " + CartButton.toString() );
+	
+	return getPriceAddedToCartProduct;
+	}
+	
+	public String getPriceFromCart(){
+		return priceFromCart.getText();
 	}
 
 }
